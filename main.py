@@ -53,8 +53,10 @@ def draw():
             display_word+="_"+" "
     d_word=word_font.render(display_word,1,(0,0,0))
     screen.blit(d_word,(400,200))
-    # pygame.display.update()
+    pygame.display.update()
 def end_msg(message):
+    
+    pygame.time.delay(1000)
     screen.fill((255,255,255))
     win_text=word_font.render(message,1,(0,0,0))
     screen.blit(win_text,(WIDTH/2-win_text.get_width()/2, HEIGHT/2-win_text.get_height()/2))
@@ -83,7 +85,7 @@ while running:
     
     clock.tick(FPS)
     screen.fill((255,255,255))
-    draw()
+    # draw()
     screen.blit(images[hangman_staus],(130,120))
     for event in pygame.event.get():
         if event.type==pygame.QUIT:
@@ -98,25 +100,22 @@ while running:
                         letter[3]=False 
                         guessed_list.append(l)
                         if l not in word:
-                            hangman_staus+=1               
-    draw()
-    pygame.display.update()
+                            hangman_staus+=1   
+    draw()            
     win=True
     for alpha in word:
         if alpha not in guessed_list:
             win=False
             break
     if win:
-        pygame.display.update()
         end_msg("YOU WON!!!   The word was "+word)
         break
     if hangman_staus==6:
-        pygame.display.update()
         end_msg("YOU LOST!!!   The word was "+word)
         break
 
 
 
 
-    pygame.display.update()
+    # pygame.display.update()
 pygame.quit()
